@@ -1,0 +1,16 @@
+const port=6529;
+require('./db/conn')
+const express=require('express')
+const app=express()
+const adminRoute=require('./routes/adminRoutes')
+const isBlog=require('./middlewares/isBlog')
+app.use(isBlog.isBlog)
+app.use('/',adminRoute)
+const userRoute=require('./routes/userRoutes')
+app.use('/',userRoute)
+const blogRoute=require('./routes/blogRoute')
+app.use('/',blogRoute)
+app.listen(port,function(req,res)
+{
+    console.log(`server running successfully on port ${port}`)
+})

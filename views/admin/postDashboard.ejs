@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Create Post</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/style.css">
+
+  </head>
+  <body>
+
+		
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar">
+				<div class="custom-menu">
+					<button type="button" id="sidebarCollapse" class="btn btn-primary">
+	          <i class="fa fa-bars"></i>
+	          <span class="sr-only">Toggle Menu</span>
+	        </button>
+        </div>
+	  		<h1><a href="/dashboard" class="logo">Admin</a></h1>
+        <ul class="list-unstyled components mb-5">
+          <li class="active">
+            <a href="/"><span class="fa fa-home mr-3"></span> Homepage</a>
+          </li>
+          <li>
+              <a href="/dashboard"><span class="fa fa-user mr-3"></span> Dashboard</a>
+          </li>
+          <li>
+            <a href="/create-post"><span class="fa   fa-sticky-note mr-3"></span>CreatePost</a>
+        </li>
+        <li>
+            <a href="/logout"><span class="fa fa-user mr-3"></span> LogOut</a>
+        </li>
+          
+        </ul>
+
+    	</nav>
+
+        <!-- Page Content  -->
+      <div id="content" class="p-4 p-md-5 pt-5">
+        <h1>Add POST</h1>
+        <div class="conatiner">
+            <form  method="post">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3>Title</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                       <input type="text" name="title" placeholder="enter post title">
+                    </div>
+                </div>
+              <div class="row">
+                  <div class="col-sm-12" style="margin-top: 25px;">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadModal">Upload Image</button>
+                    <input type="hidden" name="image" id="image">
+                  </div>
+              </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3>Content</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                      <textarea name="content" id="" cols="80" rows="5"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                      <input type="submit" value="Add Post" class="btn btn-primary">
+                    </div>
+                </div>
+            </form>
+            <%
+    if(typeof message!=='undefined' )
+    {
+        %>
+        <div class="con" style="background-color: rgb(130, 130, 206); width: 250px; font-family: Georgia, 'Times New Roman', Times, serif; font-weight: bold; margin-top: 12px;">
+          <p style="color: rgb(9, 15, 5);"><%=message%></p>
+
+        </div>
+       
+        <%
+    }
+    %>
+        </div>
+      </div>
+		</div>
+    <!-- Modal -->
+<div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Upload</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="uploadForm"  enctype="multipart/form-data">
+        <div class="modal-body">
+          <input type="file" name="image" required>
+       
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Upload</button>
+        </div>
+      </form>
+      
+    </div>
+  </div>
+</div>
+<script>
+  $(document).ready(function(){
+    $('#uploadForm').submit(function(event)
+    {
+      event.preventDefault();
+      $.ajax({
+        url:"/upload-post-image",
+        type:"POST",
+        data:new FormData(this),
+        contentType:false,
+        cache:false,
+        processData:false,
+        success:function(data)
+        {
+          if(data.success==true)
+          {
+            $('#image').val(data.path)
+            alert(data.msg)
+            $('#uploadModal').modal('hide')
+          }
+          else
+          {
+            alert(data.msg)
+          }
+
+        }
+      })
+    })
+  })
+</script>
+
+    <!-- <script src="js/jquery.min.js"></script> -->
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
