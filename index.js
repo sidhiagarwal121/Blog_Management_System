@@ -10,7 +10,7 @@ const userRoute=require('./routes/userRoutes')
 app.use('/',userRoute)
 const blogRoute=require('./routes/blogRoute')
 app.use('/',blogRoute)
-app.listen(port,function(req,res)
+app.listen(Port,function(req,res)
 {
     console.log(`server running successfully on port ${Port}`)
 })
