@@ -1,4 +1,4 @@
-const port=6529;
+const Port=6529;
 require('./db/conn')
 const express=require('express')
 const app=express()
@@ -12,5 +12,5 @@ const blogRoute=require('./routes/blogRoute')
 app.use('/',blogRoute)
 app.listen(port,function(req,res)
 {
-    console.log(`server running successfully on port ${port}`)
+    console.log(`server running successfully on port ${Port}`)
 })
