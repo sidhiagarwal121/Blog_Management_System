@@ -41,6 +41,8 @@ const blogSetupSave=async(req,res)=>{
         }
         else{
             res.render('/blogSetup',{message:'Blog not setup properly.'})
+            
+    
         }
 
     }
