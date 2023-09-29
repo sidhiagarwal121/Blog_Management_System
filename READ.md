@@ -1,2 +1,2 @@
-Author : Siddhi Agarwal.
+Author : Siddhi Agarwal. 
 This is a Blog Mangement System
