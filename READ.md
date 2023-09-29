@@ -1,1 +1,1 @@
-Author : Blog Management System Project
+Author : Siddhi Agarwal.
