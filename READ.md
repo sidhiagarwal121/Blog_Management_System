@@ -1,3 +1,3 @@
-project:Blog management system
-date:13/10/23
-author:siddhi agarwal
+Author : Siddhi Agarwal. 
+ 
+This is a Blog Mangement System
